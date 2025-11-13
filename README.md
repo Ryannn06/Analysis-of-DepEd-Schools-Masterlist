@@ -1,4 +1,4 @@
-# SQL-Case-Study-on-DepEd-Schools-Masterlist-2020-2021
+# SQL-Case-Study-on-DepEd-Schools-Masterlist
 
 ## <br>Overview
 
