@@ -3,7 +3,7 @@ SELECT COUNT(*) AS total_count
 FROM masterlist;
 
 -- schools per region
-SELECT 
+SELECT
     region, 
     COUNT(*) AS no_of_schools,
     DENSE_RANK() OVER(ORDER BY COUNT(*) DESC) as ranking
