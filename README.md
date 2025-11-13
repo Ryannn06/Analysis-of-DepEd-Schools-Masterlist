@@ -1,8 +1,8 @@
-# SY-2020-2021-DepEd-Schools-Masterlist
+# SQL-Case-Study-on-DepEd-Schools-Masterlist-2020-2021
 
 ## <br>Overview
 
-This project uses the SY 2020-2021 DepEd Schools Masterlist to demonstrate **SQL database creation**, **data cleaning**, and **analysis**.
+This project uses the S.Y. 2020-2021 DepEd Schools Masterlist to demonstrate **SQL database creation**, **data cleaning**, and **analysis**.
 
 The dataset contains 64,000+ school information across the Philippines, including location, sectors, and classification details.
 
