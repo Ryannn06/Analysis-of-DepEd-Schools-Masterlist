@@ -6,7 +6,7 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
 
 ## <br>Dataset
 **Source:** [data.gov.ph](https://data.gov.ph/index/public/dataset/SY%202020-2021%20Masterlist%20of%20Schools/5dpij7nd-uhrj-wk5l-xv2h-q5pgkiccv9ag)
-**<br>Size:** (60924, 13)
+**<br>Shape:** 60924 rows, 13 columns
 **<br>Key Fields:** `region`, `division`, `municipality`, `sector`, `urban_rural_classification`, `school_subclassification`
 
 ## <br>Project Workflow
