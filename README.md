@@ -106,16 +106,22 @@ SELECT COUNT(*) AS total_count
 FROM masterlist;
 ```
 ## <br>Tools and Technologies
-   - Python (pandas, pdfplumber, sqlalchemy)
-   - PostgreSQL / SQL
-   - Excel (for initial validation)
+   - **Python:** `pandas`, `pdfplumber`, `sqlalchemy`
+   - **Database:** `PostgreSQL`
+   - **Other tools:** `Excel`
 
-## <br>Notes
+## <br>Scope and Limitations
 
-- The dataset is SY 2020–2021 DepEd Masterlist.
-- Being denormalized, the table is easier for read-heavy queries but may have redundancy.
-- Data cleaning may be required for street address.
+This analysis uses the **SY 2020–2021 DepEd Schools Masterlist**, which includes **all DepEd-registered schools operational during that school year**.  
+- **Scope**: Public, private, SUC/LUC schools registered and active in 2020–2021  
+- **Limitations**:  
+  - Schools that closed **before** SY 2020–2021  
+  - New schools that opened **after** SY 2020–2021  
+  - Unregistered or informal learning centers
 
 ## <br>License
 
 For educational and research purposes. Please credit DepEd Philippines when using in reports or projects.
+
+<br><hr>
+*built by [Ryannn06](https://github.com/Ryannn06)*
