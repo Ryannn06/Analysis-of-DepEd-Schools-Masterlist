@@ -15,20 +15,24 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
    - Cleaned and standardized data using Pandas:
       - Corrected inconsistencies in municipality, sector, and classification fields.
       - Reformatted text cases and standardized identifiers.
-   - Load cleaned dataset to PostgreSQL (`masterlist` table)
+   - Load cleaned dataset to PostgreSQL (`masterlist` table).
 2. **Database Design** 
    - Used a denormalized table structure to simplify querying and improve performance for analysis.
    - Columns include:
 `region`, `division`, `district`, `school_name`, `municipality`, `barangay`,
 `sector`, `urban_rural_classification`, `school_subclassification`, and others.
 
-1. **SQL Analysis**
+3. **SQL Analysis**
    - Used SQL to query and analyze data.
    - Example analyses:
      - Top regions and divisions by number of schools.
      - Comparison between public vs. private schools.
      - Ratio for public and private schools per sector.
      - Classification of schools by sector and location.
+
+4. **Data Visualization (Power BI)**
+   - Created interactive dashboards to summarize and explore the DepEd Masterlist data.
+   - Enhanced insights by using simple `DAX measures` for percentages and ratios.
 
 ## <br>Database Design
 **Table name:** `masterlist` (denormalized)
@@ -61,8 +65,15 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
 | Municipality with Zero Public School | Every `municipality` listed in the DepEd Masterlist has at least one public school
 | Most School Classification per Region | - `62.67%` of schools are `non-sectarian` in NCR <br>- `78.07%` of schools are `DepED managed` in Region-VI
 
+## <br>Data Visualization
+The interactive DepEd Dashboard provides insights into school distribution across regions, sectors, and classifications.
+
+![DepEd Dashboard Screenshot](images/dashboard.jpg)
+
 ## <br>Sample Queries
-**a. Public vs. Private Ratio per Sector**
+Below are the sample queries used in this project.
+### a. SQL <hr>
+**1. Public vs. Private Ratio per Sector**
 ```sql
 SELECT
     urban_rural,
@@ -78,7 +89,7 @@ FROM masterlist
 GROUP BY urban_rural;
 ```
 
-**b. Most common school classification per region**
+**2. Most common school classification per region**
 ```sql
 WITH rank_type AS (
     SELECT
@@ -100,14 +111,53 @@ FROM rank_type
 WHERE rank = 1
 ORDER BY region ASC;
 ```
-**c. Total no. of schools in masterlist**
+**3. Total no. of schools in masterlist**
 ```sql
 SELECT COUNT(*) AS total_count
 FROM masterlist;
 ```
+
+### b. DAX <hr>
+**1. Public schools as percentage**
+```DAX
+Public School % = 
+   ROUND(DIVIDE(
+      CALCULATE(
+         COUNTROWS(masterlist),
+         masterlist[sector] = "Public"
+      ),
+      COUNTROWS(masterlist)
+   ) * 100,2)
+```
+
+**2. Private schools as percentage**
+```DAX
+Private School % = 
+ROUND(DIVIDE(
+    CALCULATE(
+        COUNTROWS(masterlist),
+        masterlist[sector]="Private"
+    ), 
+    COUNTROWS(masterlist)
+) * 100, 2)
+```
+
+**3. Public vs. Private ratio**
+```DAX
+Public vs. Private Ratio = 
+VAR ratio = ROUND(
+                DIVIDE([Public School %], 
+                        [Private School %]
+                ),2
+            )
+
+RETURN ratio & ":" & "1"
+```
+
 ## <br>Tools and Technologies
    - **Python:** `pandas`, `pdfplumber`, `sqlalchemy`
    - **Database:** `PostgreSQL`
+   - **BI tool**: `Power BI`
    - **Other tools:** `Excel`
 
 ## <br>Scope and Limitations
