@@ -15,9 +15,9 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
    - Cleaned and standardized data using Pandas:
       - Corrected inconsistencies in municipality, sector, and classification fields.
       - Reformatted text cases and standardized identifiers.
-   - Load cleaned dataset to PostgreSQL (`masterlist` table).
+   - Load cleaned dataset to PostgreSQL.
 2. **Database Design** 
-   - Used a denormalized table structure to simplify querying and improve performance for analysis.
+   - Data split into two columns: `region` and `masterlist` table.
    - Columns include:
 `region`, `division`, `district`, `school_name`, `municipality`, `barangay`,
 `sector`, `urban_rural_classification`, `school_subclassification`, and others.
@@ -35,11 +35,19 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
    - Enhanced insights by using simple `DAX measures` for percentages and ratios.
 
 ## <br>Database Design
-**Table name:** `masterlist` (denormalized)
+**Table name:** `region`
 
 | Field                                  | Description                             |
 | --------------------------------------------- | --------------------------------------- |
-| `region`                                      | Region where the school is located      |
+| `region_id`                                   |    Unique Region ID   |
+| `division`                                    | Region where the school is located               |
+
+
+**<br>Table name:** `masterlist`
+
+| Field                                  | Description                             |
+| --------------------------------------------- | --------------------------------------- |
+| `region_id`                                   |    Enforces relationship with `region` table  |
 | `division`                                    | Division under the region               |
 | `district`                                    | District of the school                  |
 | `municipality`                                | Municipality or city                    |
@@ -52,7 +60,6 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
 | `urban_rural_classification`                  | Urban, Rural, or Partially Urbanized                         |
 | `school_subclassification`                    | DepEd Managed, Non-sectarian, Sectarian, etc. |
 | `modified_curricular_offering_classification` | All Offering (K-12), ES and JHS (K-10), JHS with SHS, etc.           |
-
 
 ## <br>Key SQL Analyses
 
@@ -68,7 +75,9 @@ This project uses the S.Y. 2020-2021 DepEd Schools Masterlist that contains 64,0
 ## <br>Data Visualization
 The interactive DepEd Dashboard provides insights into school distribution across regions, sectors, and classifications.
 
-![DepEd Dashboard Screenshot](images/dashboard.jpg)
+![DepEd Dashboard Screenshot](images/dashboard_1.jpg)
+![DepEd Dashboard Screenshot](images/dashboard_2.jpg)
+![DepEd Dashboard Screenshot](images/dashboard_3.jpg)
 
 ## <br>Sample Queries
 Below are the sample queries used in this project.
@@ -168,6 +177,29 @@ This analysis uses the **SY 2020–2021 DepEd Schools Masterlist**, which includ
   - Schools that closed **before** SY 2020–2021  
   - New schools that opened **after** SY 2020–2021  
   - Unregistered or informal learning centers
+
+## <br>Folder Directory
+
+```
+2020-2021-Deped-Schools-Masterlist/
+├── archive/              
+├── dataset/
+├── images/
+├── src/                  # py scripts
+│   ├── config/
+│   │   └── __init__.py
+│   ├── database/
+│   │   └── __init__.py
+│   ├── extract/
+│   │   └── __init__.py
+│   ├── lib/
+│   │   └── __init__.py
+│   ├── transform/
+│   │   └── __init__.py
+│   └── main.py
+├── sql/                  # sql analysis
+└── .env
+```
 
 ## <br>License
 
