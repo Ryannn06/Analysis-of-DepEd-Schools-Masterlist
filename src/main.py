@@ -72,4 +72,6 @@ class Process(Database, File):
 
 
 call_etl = Process()
-call_etl.extract()
+#call_etl.create_schema()
+#call_etl.extract()
+call_etl.load()
